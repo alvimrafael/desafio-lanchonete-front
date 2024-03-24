@@ -1,0 +1,25 @@
+<div class="container mt-3">
+    <h2>Novo Pedido</h2>
+    <div *ngIf="idPedido">
+      <p>ID do Pedido: {{ idPedido }}</p>
+      <h4>Lista de Produtos Disponíveis</h4>
+      <ul>
+        <li *ngFor="let produto of produtos">
+          {{ produto.nome }} - Preço: R$ {{ produto.preco }}
+          <input type="number" [(ngModel)]="produto.quantidade" placeholder="Quantidade">
+          <button *ngIf="produto.id !== undefined" (click)="adicionarProduto(produto.id, produto.quantidade)">Adicionar</button>
+          <button *ngIf="produto.id !== undefined" (click)="retirarProduto(produto.id)">Remover</button>
+        </li>
+      </ul>
+      <div *ngIf="mostrarBotaoFecharPedido">
+        <p>Valor Total do Pedido: R$ {{ valorTotalPedido }}</p>
+        <button (click)="abrirDetalhesPedido()">Detalhes do Pedido</button>
+        <br>
+        <input type="number" [(ngModel)]="valorPago" placeholder="Valor Pago">
+        <!-- <button (click)="fecharPedido()">Fechar Pedido</button> -->
+      </div>
+    </div>
+    <div *ngIf="!idPedido">
+      <p>Aguarde enquanto criamos um novo pedido...</p>
+    </div>
+  </div>
